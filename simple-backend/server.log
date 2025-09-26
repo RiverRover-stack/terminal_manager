@@ -1,0 +1,141 @@
+🚀 Simple backend running on http://localhost:5246
+📊 Ready to process prompts for MVP demo!
+Analyzing prompt: show monthly revenue by sales region for dataset: Sales Data
+analyzePrompt called with: {
+  prompt: 'show monthly revenue by sales region',
+  hasDataset: true,
+  datasetName: 'Sales Data',
+  hasData: true,
+  hasFieldAnalysis: true
+}
+Data sample: [
+  {
+    Product_Name: 'Laptop Pro',
+    Monthly_Revenue: 125000,
+    Sales_Region: 'North America',
+    Date: '2024-01-15',
+    Customer_Count: 45
+  },
+  {
+    Product_Name: 'Desktop Elite',
+    Monthly_Revenue: 89000,
+    Sales_Region: 'Europe',
+    Date: '2024-01-15',
+    Customer_Count: 32
+  }
+]
+Sending response with data length: 12 fields: 5
+Analyzing prompt: show sales by region for dataset: undefined
+analyzePrompt called with: {
+  prompt: 'show sales by region',
+  hasDataset: false,
+  datasetName: null,
+  hasData: false,
+  hasFieldAnalysis: false
+}
+Using fallback sample data analysis
+Data sample: [
+  { region: 'North', sales: 120000, month: 'Jan', product: 'Widget A' },
+  { region: 'South', sales: 85000, month: 'Jan', product: 'Widget B' }
+]
+Sending response with data length: 8 fields: 2
+Analyzing prompt: show monthly revenue by sales region for dataset: Sales Data
+analyzePrompt called with: {
+  prompt: 'show monthly revenue by sales region',
+  hasDataset: true,
+  datasetName: 'Sales Data',
+  hasData: true,
+  hasFieldAnalysis: true
+}
+Data sample: [
+  {
+    Product_Name: 'Laptop Pro',
+    Monthly_Revenue: 125000,
+    Sales_Region: 'North America',
+    Date: '2024-01-15',
+    Customer_Count: 45
+  },
+  {
+    Product_Name: 'Desktop Elite',
+    Monthly_Revenue: 89000,
+    Sales_Region: 'Europe',
+    Date: '2024-01-15',
+    Customer_Count: 32
+  }
+]
+Sending response with data length: 12 fields: 5
+Analyzing prompt: show monthly revenue by sales region for dataset: Sales Data
+analyzePrompt called with: {
+  prompt: 'show monthly revenue by sales region',
+  hasDataset: true,
+  datasetName: 'Sales Data',
+  hasData: true,
+  hasFieldAnalysis: true
+}
+Data sample: [
+  {
+    Product_Name: 'Laptop Pro',
+    Monthly_Revenue: 125000,
+    Sales_Region: 'North America',
+    Date: '2024-01-15',
+    Customer_Count: 45
+  },
+  {
+    Product_Name: 'Desktop Elite',
+    Monthly_Revenue: 89000,
+    Sales_Region: 'Europe',
+    Date: '2024-01-15',
+    Customer_Count: 32
+  }
+]
+Sending response with data length: 12 fields: 5
+Analyzing prompt: show monthly revenue by sales region for dataset: Sales Data
+analyzePrompt called with: {
+  prompt: 'show monthly revenue by sales region',
+  hasDataset: true,
+  datasetName: 'Sales Data',
+  hasData: true,
+  hasFieldAnalysis: true
+}
+Data sample: [
+  {
+    Product_Name: 'Laptop Pro',
+    Monthly_Revenue: 125000,
+    Sales_Region: 'North America',
+    Date: '2024-01-15',
+    Customer_Count: 45
+  },
+  {
+    Product_Name: 'Desktop Elite',
+    Monthly_Revenue: 89000,
+    Sales_Region: 'Europe',
+    Date: '2024-01-15',
+    Customer_Count: 32
+  }
+]
+Sending response with data length: 12 fields: 5
+Analyzing prompt: show monthly revenue by sales region for dataset: Sales Data
+analyzePrompt called with: {
+  prompt: 'show monthly revenue by sales region',
+  hasDataset: true,
+  datasetName: 'Sales Data',
+  hasData: true,
+  hasFieldAnalysis: true
+}
+Data sample: [
+  {
+    Product_Name: 'Laptop Pro',
+    Monthly_Revenue: 125000,
+    Sales_Region: 'North America',
+    Date: '2024-01-15',
+    Customer_Count: 45
+  },
+  {
+    Product_Name: 'Desktop Elite',
+    Monthly_Revenue: 89000,
+    Sales_Region: 'Europe',
+    Date: '2024-01-15',
+    Customer_Count: 32
+  }
+]
+Sending response with data length: 12 fields: 5

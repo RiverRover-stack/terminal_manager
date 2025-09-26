@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/adityashandilya/Desktop/**)",
+      "Bash(brew install:*)",
+      "Bash(curl:*)",
+      "Read(//var/folders/cp/1zmmz_d15ks6wrh3hwc564qm0000gn/T/TemporaryItems/NSIRD_screencaptureui_fK8m6X/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
