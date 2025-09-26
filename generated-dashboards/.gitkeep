@@ -1,0 +1,2 @@
+# This file ensures the generated-dashboards directory is tracked by git
+# The directory will be populated with dynamically created Streamlit dashboards
