@@ -15,31 +15,34 @@ from config import Config
 
 load_dotenv()
 
+# quick setup for demo
 app = Flask(__name__)
 CORS(app, origins=Config.CORS_ORIGINS)
 Config.ensure_directories()
 
+# TODO: maybe use a proper database later
 running_dashboards = {}
 
 class DashboardGenerator:
     def __init__(self):
         self.ollama_url = f"{Config.OLLAMA_URL}/api/generate"
         self.excel_dir = os.path.join(Config.PROJECT_ROOT, 'excel-data')
-        self.ensure_excel_directory()
+        self.ensure_excel_directory()  # make sure folder exists
 
     def sanitize_table_name(self, name):
         import re
+        # clean up the filename for sqlite
         sanitized = re.sub(r'[^a-zA-Z0-9_]', '_', str(name).lower())
         sanitized = re.sub(r'_+', '_', sanitized)
         if sanitized and sanitized[0].isdigit():
-            sanitized = 'data_' + sanitized
+            sanitized = 'data_' + sanitized  # sqlite doesn't like numbers first
         if not sanitized or len(sanitized.strip('_')) == 0:
-            sanitized = 'data_table'
+            sanitized = 'data_table'  # fallback name
         if len(sanitized) > 50:
-            sanitized = sanitized[:50]
+            sanitized = sanitized[:50]  # keep it short
         sanitized = sanitized.rstrip('_')
         if not sanitized:
-            sanitized = 'data_table'
+            sanitized = 'data_table'  # final fallback
         return sanitized
 
     def ensure_excel_directory(self):
@@ -125,10 +128,11 @@ class DashboardGenerator:
     def process_shipment_data(self, df):
         try:
             processed_df = df.copy()
+            # FIXME: this should be more generic
             numeric_columns = ['GrossQuantity', 'FlowRate']
             for col in numeric_columns:
                 if col in processed_df.columns:
-                    processed_df[col] = pd.to_numeric(processed_df[col], errors='coerce').fillna(0)
+                    processed_df[col] = pd.to_numeric(processed_df[col], errors='coerce').fillna(0)  # convert to numbers, fill NaN with 0
             if 'ScheduledDate' in processed_df.columns:
                 for date_format in ['%m-%d-%y', '%d-%m-%y', '%Y-%m-%d']:
                     try:
@@ -168,12 +172,13 @@ class DashboardGenerator:
 
     def call_llm(self, prompt):
         try:
+            # basic ollama call - could be improved
             payload = {
                 "model": Config.OLLAMA_MODEL,
                 "prompt": prompt,
                 "stream": False,
                 "options": {
-                    "temperature": 0.3,
+                    "temperature": 0.3,  # not too creative
                     "top_p": 0.9
                 }
             }
@@ -1777,9 +1782,10 @@ def generate_dashboard():
         if not user_prompt:
             return jsonify({'error': 'Prompt is required'}), 400
         print(f"Generating dashboard for: '{user_prompt}'")
-        print("AI processing complete")
+        print("AI processing complete")  # TODO: actually process with LLM
+        # quick hack for demo - just return fixed URL
         dashboard_id = f"{int(time.time())}_{hash(user_prompt) % 10000}"
-        dashboard_url = "http://localhost:8520"
+        dashboard_url = "http://localhost:8520"  # hardcoded for now
         return jsonify({
             'success': True,
             'dashboard_id': dashboard_id,
@@ -1816,16 +1822,18 @@ def stop_dashboard(dashboard_id):
         return jsonify({'error': 'Dashboard not found'}), 404
 
 if __name__ == '__main__':
-    print("Starting AI dashboard backend...")
+    print("Starting AI dashboard backend...")  # simple startup
     print(f"Config: {Config.OLLAMA_URL} | Model: {Config.OLLAMA_MODEL}")
+    # check if ollama is running
     status = Config.validate_ollama_connection()
     if status['connected']:
         print("Ollama connected")
     else:
         print(f"Ollama connection failed: {status.get('error', 'Unknown error')}")
-        print("Start Ollama with: ollama serve")
+        print("Start Ollama with: ollama serve")  # reminder
+    # start the flask app
     app.run(
-        debug=Config.DEBUG,
+        debug=Config.DEBUG,  # for development
         host=Config.AI_BACKEND_HOST,
         port=Config.AI_BACKEND_PORT
     )

@@ -1,29 +1,27 @@
 import os
 from typing import Optional
 
+# basic config for the AI backend
 class Config:
-    """Configuration management for AI Backend"""
 
-    # Ollama Configuration
+    # ollama settings
     OLLAMA_URL: str = os.getenv('OLLAMA_URL', 'http://localhost:11434')
-    OLLAMA_MODEL: str = os.getenv('OLLAMA_MODEL', 'llama3')
-    OLLAMA_TIMEOUT: int = int(os.getenv('OLLAMA_TIMEOUT', '60'))
+    OLLAMA_MODEL: str = os.getenv('OLLAMA_MODEL', 'llama3:latest')  # default model
+    OLLAMA_TIMEOUT: int = int(os.getenv('OLLAMA_TIMEOUT', '60'))  # 60 sec timeout
 
-    # Server Configuration
-    AI_BACKEND_PORT: int = int(os.getenv('AI_BACKEND_PORT', '5247'))
+    # server config
+    AI_BACKEND_PORT: int = int(os.getenv('AI_BACKEND_PORT', '5247'))  # our port
     AI_BACKEND_HOST: str = os.getenv('AI_BACKEND_HOST', 'localhost')
-    DEBUG: bool = os.getenv('AI_DEBUG', 'false').lower() == 'true'
+    DEBUG: bool = os.getenv('AI_DEBUG', 'false').lower() == 'true'  # dev mode
 
-    # CORS Configuration
+    # TODO: make CORS more restrictive for production
     CORS_ORIGINS: list = os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',')
 
-    # Dashboard Configuration
     STREAMLIT_BASE_PORT: int = int(os.getenv('STREAMLIT_BASE_PORT', '8501'))
     MAX_DASHBOARD_SIZE: str = os.getenv('MAX_DASHBOARD_SIZE', '10MB')
     DASHBOARD_TIMEOUT: int = int(os.getenv('DASHBOARD_TIMEOUT', '30000'))
     DEFAULT_CHART_TYPE: str = os.getenv('DEFAULT_CHART_TYPE', 'auto')
 
-    # Paths
     PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     DASHBOARD_DIR: str = os.path.join(PROJECT_ROOT, 'generated-dashboards')
     DATA_DIR: str = os.path.join(PROJECT_ROOT, 'data')
