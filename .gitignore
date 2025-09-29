@@ -1,29 +1,53 @@
-node_modules/
-*.log
-.env
+# OS files
 .DS_Store
-__pycache__/
+Thumbs.db
+
+# Dependencies
+node_modules/
+ai-backend/venv/
+ai-backend/__pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
+__pycache__/
+
+# Environment and config
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+*.pid
+
+# Generated files
+generated-dashboards/
+data/
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-venv/
-ENV/
-.venv
-.claude
+
+# Temporary files
+*.tmp
+*.bak
+.cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Runtime directories that should be created by scripts
+!generated-dashboards/.gitkeep
+!logs/.gitkeep
+!data/.gitkeep
+
+# Build output
+backend/WebApplication1/bin/
+backend/WebApplication1/obj/
+generated-dashboards/
+logs/
+*.zip
+*.pdb
+*.dll
+*.exe
+*.cache

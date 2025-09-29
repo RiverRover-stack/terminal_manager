@@ -105,6 +105,7 @@ start_ollama() {
     local ollama_pid=$!
 
     # Wait a moment for startup
+    
     sleep 3
 
     # Check if it's running

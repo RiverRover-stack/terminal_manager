@@ -12,41 +12,41 @@ from config import Config
 
 def test_ollama_connection():
     """Test Ollama API connection"""
-    print("🔍 Testing Ollama connection...")
+    print("Testing Ollama connection...")
 
     try:
         # Test basic connection
         response = requests.get(f"{Config.OLLAMA_URL}/api/tags", timeout=5)
         if response.status_code != 200:
-            print(f"❌ Ollama API returned status {response.status_code}")
+            print(f"Ollama API returned status {response.status_code}")
             return False
 
         models = response.json().get('models', [])
         model_names = [model['name'] for model in models]
 
-        print(f"✅ Ollama connected successfully")
-        print(f"📦 Available models: {', '.join(model_names) if model_names else 'None'}")
+        print(f"Ollama connected successfully")
+        print(f"Available models: {', '.join(model_names) if model_names else 'None'}")
 
         # Test required model
         if Config.OLLAMA_MODEL in model_names:
-            print(f"✅ Required model '{Config.OLLAMA_MODEL}' is available")
+            print(f"Required model '{Config.OLLAMA_MODEL}' is available")
             return True
         else:
-            print(f"⚠️  Required model '{Config.OLLAMA_MODEL}' not found")
-            print(f"💡 Install with: ollama pull {Config.OLLAMA_MODEL}")
+            print(f"Required model '{Config.OLLAMA_MODEL}' not found")
+            print(f"Install with: ollama pull {Config.OLLAMA_MODEL}")
             return False
 
     except requests.exceptions.ConnectionError:
-        print("❌ Cannot connect to Ollama")
-        print("💡 Start Ollama with: ollama serve")
+        print("Cannot connect to Ollama")
+        print("Start Ollama with: ollama serve")
         return False
     except Exception as e:
-        print(f"❌ Error testing Ollama: {e}")
+        print(f"Error testing Ollama: {e}")
         return False
 
 def test_llm_generation():
     """Test LLM text generation"""
-    print("\n🧠 Testing LLM generation...")
+    print("\nTesting LLM generation...")
 
     try:
         payload = {
@@ -66,19 +66,19 @@ def test_llm_generation():
 
         if response.status_code == 200:
             result = response.json().get('response', '').strip()
-            print(f"✅ LLM Response: {result}")
+            print(f"LLM Response: {result}")
             return True
         else:
-            print(f"❌ LLM generation failed with status {response.status_code}")
+            print(f"LLM generation failed with status {response.status_code}")
             return False
 
     except Exception as e:
-        print(f"❌ Error testing LLM generation: {e}")
+        print(f"Error testing LLM generation: {e}")
         return False
 
 def test_directories():
     """Test required directories"""
-    print("\n📁 Testing directories...")
+    print("\nTesting directories...")
 
     Config.ensure_directories()
 
@@ -91,16 +91,16 @@ def test_directories():
     all_good = True
     for name, path in directories.items():
         if os.path.exists(path):
-            print(f"✅ {name} directory: {path}")
+            print(f"{name} directory: {path}")
         else:
-            print(f"❌ {name} directory missing: {path}")
+            print(f"{name} directory missing: {path}")
             all_good = False
 
     return all_good
 
 def test_dependencies():
     """Test Python dependencies"""
-    print("\n📦 Testing Python dependencies...")
+    print("\nTesting Python dependencies...")
 
     required_packages = [
         'flask', 'pandas', 'requests', 'streamlit',
@@ -111,21 +111,21 @@ def test_dependencies():
     for package in required_packages:
         try:
             __import__(package)
-            print(f"✅ {package}")
+            print(f"{package} - OK")
         except ImportError:
-            print(f"❌ {package}")
+            print(f"{package} - MISSING")
             missing.append(package)
 
     if missing:
-        print(f"\n⚠️  Missing packages: {', '.join(missing)}")
-        print("💡 Install with: pip install -r requirements.txt")
+        print(f"\nMissing packages: {', '.join(missing)}")
+        print("Install with: pip install -r requirements.txt")
         return False
 
     return True
 
 def main():
     """Run all tests"""
-    print("🚀 AI Backend Connection Test\n")
+    print("AI Backend Connection Test\n")
 
     tests = [
         ("Dependencies", test_dependencies),
@@ -140,25 +140,25 @@ def main():
             result = test_func()
             results.append((test_name, result))
         except Exception as e:
-            print(f"❌ {test_name} test failed with error: {e}")
+            print(f"{test_name} test failed with error: {e}")
             results.append((test_name, False))
 
     # Summary
     print("\n" + "="*50)
-    print("📊 Test Results:")
+    print("Test Results:")
 
     all_passed = True
     for test_name, passed in results:
-        status = "✅ PASS" if passed else "❌ FAIL"
+        status = "PASS" if passed else "FAIL"
         print(f"  {test_name}: {status}")
         if not passed:
             all_passed = False
 
     if all_passed:
-        print("\n🎉 All tests passed! AI Backend is ready.")
+        print("\nAll tests passed! AI Backend is ready.")
         sys.exit(0)
     else:
-        print("\n⚠️  Some tests failed. Check configuration and dependencies.")
+        print("\nSome tests failed. Check configuration and dependencies.")
         sys.exit(1)
 
 if __name__ == "__main__":
