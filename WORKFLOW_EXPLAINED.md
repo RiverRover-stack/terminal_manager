@@ -92,7 +92,7 @@ graph TD
 *   **Local Processing**: All data stays within the environment (local LLM, local SQLite). No data is sent to external cloud APIs.
 *   **Normalization**: Automatic handling of date formats and numeric conversions prevents common data errors.
 
-## 5. Current Implementation Notes (For Interviewer)
+## 5. Current Implementation Notes
 
 *   **Demo vs. Production**:
     *   The `DashboardGenerator` class contains the full, sophisticated logic described above.
